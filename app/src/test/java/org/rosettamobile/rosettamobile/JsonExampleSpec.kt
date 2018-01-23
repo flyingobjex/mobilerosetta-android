@@ -9,9 +9,9 @@ class JsonExampleSpec : StringSpec() {
 
     init {
 
-        val collection = example.parseTextToJson(jsonDataRaw)
+        val collection = example.parseTextToJson(jsonString)
 
-        "map raw json key 'author_id' to 'id' in Author data class" {
+        "it should map raw json key 'author_id' to 'id' in Author data class" {
             collection?.entries?.get(1)?.author?.id shouldBe 1422
         }
 
@@ -25,8 +25,7 @@ class JsonExampleSpec : StringSpec() {
     }
 }
 
-
-val jsonDataRaw = """
+val jsonString = """
 {
     "title": "Main Collection",
     "entry_list": [
