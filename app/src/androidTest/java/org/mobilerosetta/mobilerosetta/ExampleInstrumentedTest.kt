@@ -1,4 +1,4 @@
-package org.rosettamobile.rosettamobile
+package org.mobilerosetta.mobilerosetta
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

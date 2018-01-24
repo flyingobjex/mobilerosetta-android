@@ -1,4 +1,4 @@
-package org.rosettamobile.rosettamobile
+package org.mobilerosetta.mobilerosetta
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

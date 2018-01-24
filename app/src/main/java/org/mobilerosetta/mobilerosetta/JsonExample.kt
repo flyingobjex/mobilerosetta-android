@@ -1,4 +1,4 @@
-package org.rosettamobile.rosettamobile
+package org.mobilerosetta.mobilerosetta
 
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi

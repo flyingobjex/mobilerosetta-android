@@ -1,4 +1,4 @@
-package org.rosettamobile.rosettamobile
+package org.mobilerosetta.mobilerosetta
 
 data class Author(
         val name:String?,

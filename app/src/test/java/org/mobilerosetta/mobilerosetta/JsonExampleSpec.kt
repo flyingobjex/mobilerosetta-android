@@ -1,4 +1,4 @@
-package org.rosettamobile.rosettamobile
+package org.mobilerosetta.mobilerosetta
 
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
