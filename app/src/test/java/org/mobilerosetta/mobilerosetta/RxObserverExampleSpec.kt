@@ -19,7 +19,7 @@ class RxObserverExampleSpec : StringSpec() {
             example.description() shouldBe "Author: New Author, ID: 2223"
         }
 
-        "when a subscription is updated, the description method should match" {
+        "when a subscription is updated, it should reflect the new values" {
             example.author.onNext(Author("Next Author", 1414))
             example.description() shouldBe "Author: Next Author, ID: 1414"
         }
