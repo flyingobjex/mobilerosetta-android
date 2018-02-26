@@ -5,39 +5,38 @@ import io.kotlintest.specs.StringSpec
 
 class RxObserverExampleSpec : StringSpec() {
 
-    val example = RxObserverExample()
-
     init {
 
-        "given an observable author, when an update is made, the code block should run" {
-            example.author.subscribe { a ->
-                a.name shouldBe "New Author"
-                a.id shouldBe 2223
+        "given an observable paragraph, when an update is made, the code block should run" {
+            val example = RxObserverExample()
+            example.section.subscribe {
+                 it.description shouldBe "H:H1, S:0, P:0"
             }
 
-            example.author.onNext(Author("New Author", 2223))
-            example.description() shouldBe "Author: New Author, ID: 2223"
+            example.section.onNext(Section("H1", listOf(), listOf()))
         }
 
-        "when a subscription is updated, it should reflect the new values" {
-            example.author.onNext(Author("Next Author", 1414))
-            example.description() shouldBe "Author: Next Author, ID: 1414"
-        }
+        "given an Section with a null heading, it should return '--'" {
+            val example = RxObserverExample()
+            example.section.subscribe { sec ->
+                sec.description shouldBe "H:--, S:1, P:0"
+            }
 
-        "given an author with no name or id, it should return 'no name' and 999" {
-            example.author.onNext(Author(null, null))
-            example.description() shouldBe "Author: no name, ID: 999"
+            val s = Section(null, listOf(),
+                        listOf(Section(null, listOf(), listOf())))
+
+            example.section.onNext(s)
         }
 
         "optional code block should execute" {
-            example.author.subscribe { a ->
-                a.id?.let{ 
-                    println("block should execute")
-                    it shouldBe 3322
+            val example = RxObserverExample()
+            example.section.subscribe {
+                it.heading?.let { h -> // optional code block, optional let
+                  h shouldBe "H3"
                 }
-                a.name?.let{ println("!! should not execute !!") }
             }
-            example.author.onNext(Author(null, 3322))
+
+            example.section.onNext(Section("H3", listOf(), listOf()))
         }
     }
 }

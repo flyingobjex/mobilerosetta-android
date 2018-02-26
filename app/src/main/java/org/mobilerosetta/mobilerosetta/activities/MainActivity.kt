@@ -1,7 +1,8 @@
-package org.mobilerosetta.mobilerosetta
+package org.mobilerosetta.mobilerosetta.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import org.mobilerosetta.mobilerosetta.R
 
 class MainActivity : AppCompatActivity() {
 

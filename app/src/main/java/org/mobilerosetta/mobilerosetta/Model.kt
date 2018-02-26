@@ -1,28 +1,59 @@
 package org.mobilerosetta.mobilerosetta
 
-data class Author(
-        val name:String?,
-        private val author_id:Int?) {
+data class WikiPage(
+        val title: String = "none",  // default value in constructor
+        private val pageid: Int = -1,  // re-mapping json
+        val sections: List<Section>) {
 
-    val id = author_id // direct mapping in lieu of @Json meta tags
-
+    val id = pageid // re-mapping json
 }
 
-data class Page(
-        val title:String = "none",
-        val pageid:Int = -1,
-        val author:Author?)
+data class Section(val heading: String?,
+                   private val paragraphs_list: List<Paragraph>,
+                   val sections: List<Section>? = null) { // default value in constructor
 
-/**
- * @param title mapped directly from JSON object.
- * @param pageid mapped directly from JSON object.
- * @param entry_list indirectly mapped, private to encapsulate unused json name
- * @property entries custom mapping from JSON object.
- * @constructor Invoked directly in Moshi.Builder() using json adaptor.
- */
-data class PageCollection(val title:String?,
-                          val pageid:Int = -1,
-                          private val entry_list:List<Page>) {
+    val paragraphs = paragraphs_list // direct mapping in lieu of @Json meta tags
 
-    val entries = entry_list // direct mapping in lieu of @Json meta tags
+    val description:String // shorthand getter & setter
+        get() = "H:${heading?: "--"}, " +  // optional assignment, elvis symbol
+                "S:${sections?.count()?: 0}, " + // optional method call, optional assignment
+                "P:${paragraphs.count()}"
 }
+
+
+data class Paragraph(val paragraph_id: Int = -1,
+                     val body: String) {
+
+    val id = paragraph_id // direct mapping in lieu of @Json meta tags
+}
+
+class Data {
+
+    val json = """
+{
+  "title": "Wiki Page Title",
+  "pageid": 313,
+  "sections": [
+    {
+      "heading": "First Section",
+      "paragraphs_list": [
+        {
+          "paragraph_id": 1,
+          "body": "Word1 word2 word3"
+        }
+      ],
+      "sections":[
+        {
+          "heading": "First SubSection",
+          "paragraphs_list": [
+            {
+              "paragraph_id": 2,
+              "body": "Word4 word5 word6"
+            },
+            {
+              "paragraph_id": 3,
+              "body": "Word7 word8 word9"
+            }
+]}]}]} """ }
+
+

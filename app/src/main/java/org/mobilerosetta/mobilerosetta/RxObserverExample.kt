@@ -1,22 +1,14 @@
 package org.mobilerosetta.mobilerosetta
 
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 
 class RxObserverExample {
 
-    val author = PublishSubject.create<Author>()
-
-    private var currentName:String? = null
-    private var currentAuthorID:Int? = null
-
+    val section = BehaviorSubject.create<Section>()
+    
     init {
-        author.subscribe { a ->
-            currentName = a.name
-            currentAuthorID = a.id
+        section.subscribe { p ->
+            println("RxObserverExample.subscribe{} p.body = ${p.heading}")
         }
-    }
-
-    fun description():String {
-        return "Author: ${currentName?: "no name"}, ID: ${currentAuthorID?: 999}"
     }
 }
