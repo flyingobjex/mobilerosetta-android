@@ -7,36 +7,23 @@ class RxObserverExampleSpec : StringSpec() {
 
     init {
 
-        "given an observable paragraph, when an update is made, the code block should run" {
+        "given an observable Section, when an update is made, the code block should run" {
             val example = RxObserverExample()
+            example.details shouldBe "H:++, S:++, P:++"
+
+            var values = ""  // collects the values of subscription during test
             example.section.subscribe {
-                 it.description shouldBe "H:H1, S:0, P:0"
+                values += it.heading + ","
             }
 
-            example.section.onNext(Section("H1", listOf(), listOf()))
+            example.section.onNext(Section("H1", listOf(Paragraph(1,"")), listOf()))
+            example.details shouldBe "H:H1, S:0, P:1"
+
+            example.section.onNext(Section("H2", listOf(Paragraph(2,"")), listOf()))
+            example.description shouldBe "Details for section :: H:H2, S:0, P:1"
+
+            values shouldBe "++,H1,H2,"
         }
 
-        "given an Section with a null heading, it should return '--'" {
-            val example = RxObserverExample()
-            example.section.subscribe { sec ->
-                sec.description shouldBe "H:--, S:1, P:0"
-            }
-
-            val s = Section(null, listOf(),
-                        listOf(Section(null, listOf(), listOf())))
-
-            example.section.onNext(s)
-        }
-
-        "optional code block should execute" {
-            val example = RxObserverExample()
-            example.section.subscribe {
-                it.heading?.let { h -> // optional code block, optional let
-                  h shouldBe "H3"
-                }
-            }
-
-            example.section.onNext(Section("H3", listOf(), listOf()))
-        }
     }
 }

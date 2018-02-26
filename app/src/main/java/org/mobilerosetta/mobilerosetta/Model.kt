@@ -13,11 +13,6 @@ data class Section(val heading: String?,
                    val sections: List<Section>? = null) { // default value in constructor
 
     val paragraphs = paragraphs_list // direct mapping in lieu of @Json meta tags
-
-    val description:String // shorthand getter & setter
-        get() = "H:${heading?: "--"}, " +  // optional assignment, elvis symbol
-                "S:${sections?.count()?: 0}, " + // optional method call, optional assignment
-                "P:${paragraphs.count()}"
 }
 
 
@@ -27,7 +22,7 @@ data class Paragraph(val paragraph_id: Int = -1,
     val id = paragraph_id // direct mapping in lieu of @Json meta tags
 }
 
-class Data {
+class ExampleData {
 
     val json = """
 {
