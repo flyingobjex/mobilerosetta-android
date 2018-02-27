@@ -1,11 +1,10 @@
 package org.mobilerosetta.mobilerosetta
-
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 
 class JsonExample {
 
-    fun parse(text:String): WikiPage? {
+    fun parse(text: String): WikiPage? {
         val moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
                 .build()
@@ -14,7 +13,7 @@ class JsonExample {
         try {
             jsonAdapter.fromJson(text)?.let { return it }
 
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             println("!! Exception !! e.message = ${e.message}")
             println(e)
         }

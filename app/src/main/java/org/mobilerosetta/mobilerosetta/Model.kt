@@ -4,26 +4,21 @@ data class WikiPage(
         val title: String = "none",  // default value in constructor
         private val pageid: Int = -1,  // re-mapping json
         val sections: List<Section>) {
-
     val id = pageid // re-mapping json
 }
 
 data class Section(val heading: String?,
                    private val paragraphs_list: List<Paragraph>,
                    val sections: List<Section>? = null) { // default value in constructor
-
     val paragraphs = paragraphs_list // direct mapping in lieu of @Json meta tags
 }
 
-
 data class Paragraph(val paragraph_id: Int = -1,
                      val body: String) {
-
-    val id = paragraph_id // direct mapping in lieu of @Json meta tags
+    val id = paragraph_id
 }
 
 class ExampleData {
-
     val json = """
 {
   "title": "Wiki Page Title",
@@ -49,6 +44,7 @@ class ExampleData {
               "paragraph_id": 3,
               "body": "Word7 word8 word9"
             }
-]}]}]} """ }
+]}]}]} """
+}
 
 
